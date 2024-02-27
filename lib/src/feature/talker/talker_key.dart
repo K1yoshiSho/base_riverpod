@@ -11,6 +11,7 @@ enum TalkerLogType {
   warning('warning'),
   exception('exception'),
   good('good'),
+  provider('provider'),
 
   /// Http section
   httpError('http-error'),
@@ -81,6 +82,7 @@ const _typeColors = {
   TalkerLogType.warning: Color.fromARGB(255, 239, 108, 0),
   TalkerLogType.exception: Color.fromARGB(255, 239, 83, 80),
   TalkerLogType.good: Color.fromARGB(255, 120, 230, 129),
+  TalkerLogType.provider: Color.fromARGB(255, 120, 180, 190),
 
   /// Http section
   TalkerLogType.httpError: Color.fromARGB(255, 239, 83, 80),

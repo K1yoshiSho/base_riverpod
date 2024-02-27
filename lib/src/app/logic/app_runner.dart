@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:base_starter/src/app/widget/app.dart';
+import 'package:base_starter/src/common/services/provider_observer.dart';
 import 'package:base_starter/src/common/ui/pages/restart_wrapper.dart';
 import 'package:base_starter/src/common/utils/talker_logger.dart';
 import 'package:base_starter/src/feature/initialization/logic/initialization_processor.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// A class which is responsible for initialization and running the app.
 final class AppRunner
@@ -43,9 +45,14 @@ final class AppRunner
 
         FlutterNativeSplash.remove();
         runApp(
-          RestartWrapper(
-            child: App(
-              result: result,
+          ProviderScope(
+            observers: [
+              ProviderLoggerObserver(),
+            ],
+            child: RestartWrapper(
+              child: App(
+                result: result,
+              ),
             ),
           ),
         );

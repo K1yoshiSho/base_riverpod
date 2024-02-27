@@ -21,6 +21,7 @@ const _lightTypeColors = {
   "warning": Color.fromARGB(255, 239, 108, 0),
   "exception": Color.fromARGB(255, 239, 83, 80),
   "good": Color.fromARGB(255, 90, 213, 100),
+  "provider": Color.fromARGB(255, 120, 180, 190),
 
   /// Http section
   "http-error": Color.fromARGB(255, 239, 83, 80),
@@ -47,6 +48,7 @@ const _darkTypeColors = {
   "warning": Color.fromARGB(255, 239, 108, 0),
   "exception": Color.fromARGB(255, 239, 83, 80),
   "good": Color.fromARGB(255, 120, 230, 129),
+  "provider": Color.fromARGB(255, 120, 180, 190),
 
   /// Http section
   "http-error": Color.fromARGB(255, 239, 83, 80),

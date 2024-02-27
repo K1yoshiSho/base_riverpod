@@ -63,3 +63,20 @@ class RouteLog extends TalkerLog {
   @override
   AnsiPen get pen => AnsiPen()..rgb(r: 0.5, g: 0.5);
 }
+
+/// `ProviderLog` - This class contains the provider log.
+
+class ProviderLog extends TalkerLog {
+  ProviderLog(String super.message);
+
+  /// Your custom log title
+  @override
+  String get title => 'provider';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..rgb(r: 0.2, g: 0.8, b: 0.9);
+}
+
+AnsiPen getAnsiPenFromColor(Color color) =>
+    AnsiPen()..rgb(r: color.red, g: color.green, b: color.blue);

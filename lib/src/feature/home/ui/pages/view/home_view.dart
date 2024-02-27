@@ -1,6 +1,6 @@
 part of '../home.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends ConsumerWidget {
   final void Function() onSettingsPressed;
   final void Function() onLoggerPressed;
   const HomeView({
@@ -10,8 +10,24 @@ class HomeView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
         backgroundColor: context.theme.colorScheme.background,
+        floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              heroTag: 'increment',
+              onPressed: () => ref.read(counterProvider.notifier).increment(),
+              child: const Icon(Icons.add),
+            ),
+            const Gap(8),
+            FloatingActionButton(
+              heroTag: 'decrement',
+              onPressed: () => ref.read(counterProvider.notifier).decrement(),
+              child: const Icon(Icons.remove),
+            ),
+          ],
+        ),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -49,11 +65,12 @@ class HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(16),
                     child: Text(
-                      context.l10n.app_title,
-                      style: context.theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                      "You have pushed the button this many times: ${ref.watch(counterProvider)}",
+                      textAlign: TextAlign.center,
+                      style: context.theme.textTheme.titleLarge?.copyWith(
+                        fontSize: 20,
                         color: context.theme.colorScheme.onBackground,
                       ),
                     ),
