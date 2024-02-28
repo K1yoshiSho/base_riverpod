@@ -1,17 +1,11 @@
-// ignore_for_file: implementation_imports
+part of 'talker_monitor_page.dart';
 
-import 'package:base_starter/src/common/utils/extensions/context_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:talker_flutter/src/ui/widgets/base_card.dart';
-import 'package:talker_flutter/talker_flutter.dart';
-
-class TalkerMonitorsCard extends StatelessWidget {
-  const TalkerMonitorsCard({
+class _TalkerMonitorsCard extends StatelessWidget {
+  const _TalkerMonitorsCard({
     required this.logs,
     required this.title,
     required this.color,
     required this.icon,
-    super.key,
     this.subtitle,
     this.subtitleWidget,
     this.onTap,

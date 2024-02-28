@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 
+part 'toaster_body.dart';
+
 final class Toaster {
   const Toaster._();
 
   static Future<void> showToast(
     BuildContext context, {
     required String title,
-    Color backgroundColor = const Color(0xff656565),
+    Color backgroundColor = const Color(0xff3d3b3b),
     Color textColor = Colors.white,
     bool hasImage = true,
     bool isDismissable = true,
@@ -24,40 +26,11 @@ final class Toaster {
   }) async {
     fToast.removeCustomToast();
     fToast.showToast(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (hasImage) ...[
-                Image.asset(
-                  Assets.images.icon1024x1024.path,
-                  width: 24,
-                  height: 24,
-                ),
-                const Gap(8),
-              ],
-              Flexible(
-                child: AutoSizeText(
-                  title,
-                  style: context.theme.textTheme.bodyMedium?.copyWith(
-                    color: textColor,
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: _ToasterBody(
+        title: title,
+        backgroundColor: backgroundColor,
+        textColor: textColor,
+        hasImage: hasImage,
       ),
       gravity: gravity,
       fadeDuration: fadeDuration,
@@ -87,40 +60,11 @@ final class Toaster {
   }) async {
     fToast.removeCustomToast();
     fToast.showToast(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: context.colors.success,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (hasImage) ...[
-                Image.asset(
-                  Assets.images.icon1024x1024.path,
-                  width: 24,
-                  height: 24,
-                ),
-                const Gap(8),
-              ],
-              Flexible(
-                child: AutoSizeText(
-                  title,
-                  style: context.theme.textTheme.bodyMedium?.copyWith(
-                    color: textColor,
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: _ToasterBody(
+        title: title,
+        backgroundColor: context.colors.success,
+        textColor: textColor,
+        hasImage: hasImage,
       ),
       gravity: gravity,
       fadeDuration: fadeDuration,
@@ -150,40 +94,11 @@ final class Toaster {
   }) async {
     fToast.removeCustomToast();
     fToast.showToast(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: context.colors.error,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (hasImage) ...[
-                Image.asset(
-                  Assets.images.icon1024x1024.path,
-                  width: 24,
-                  height: 24,
-                ),
-                const Gap(8),
-              ],
-              Flexible(
-                child: AutoSizeText(
-                  title,
-                  style: context.theme.textTheme.bodyMedium?.copyWith(
-                    color: textColor,
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: _ToasterBody(
+        title: title,
+        backgroundColor: context.colors.error,
+        textColor: textColor,
+        hasImage: hasImage,
       ),
       gravity: gravity,
       fadeDuration: fadeDuration,

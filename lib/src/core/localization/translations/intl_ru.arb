@@ -32,6 +32,13 @@
          "text": {}
       }
    },
+   "talker_type_provider": "Провайдеры",
+   "talker_type_provider_count": "Количество провайдер логов: {text}",
+   "@talker_type_provider_count": {
+      "placeholders": {
+         "text": {}
+      }
+   },
    "talker_type_info": "Информативные",
    "talker_type_info_count": "Количество информативных логов: {text}",
    "@talker_type_info_count": {
@@ -155,6 +162,12 @@
    "go_to_logger": "Перейти на страницу логгера",
    "environment_tap_number": "Для открытия диалога осталось: {number}",
    "@environment_tap_number": {
+      "placeholders": {
+         "number": {}
+      }
+   },
+   "counter_times_text": "Количество нажатий на кнопку: {number}",
+   "@counter_times_text": {
       "placeholders": {
          "number": {}
       }

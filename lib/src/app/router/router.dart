@@ -2,8 +2,8 @@ import 'package:base_starter/src/common/ui/pages/error_router_page.dart';
 import 'package:base_starter/src/common/utils/extensions/context_extension.dart';
 import 'package:base_starter/src/common/utils/global_variables.dart';
 import 'package:base_starter/src/feature/home/ui/pages/home.dart';
+import 'package:base_starter/src/feature/inspector/inspector_page.dart';
 import 'package:base_starter/src/feature/settings/ui/settings.dart';
-import 'package:base_starter/src/feature/talker/talker_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -96,23 +96,23 @@ GoRouter createRouter() => GoRouter(
               ),
             ),
             GoRoute(
-              name: LoggerPage.name,
-              path: LoggerPage.routePath,
+              name: InspectorPage.name,
+              path: InspectorPage.routePath,
               pageBuilder: (context, pathParameters) {
                 final Map<String, dynamic>? args =
                     pathParameters.extra as Map<String, dynamic>?;
                 return CupertinoPage(
-                  child: LoggerPage(
-                    appBarTitle:
-                        args?[LoggerPage.paramTitle] as String? ?? "Logger",
-                    theme: args?[LoggerPage.paramTheme] as TalkerScreenTheme? ??
+                  child: InspectorPage(
+                    appBarTitle: args?[InspectorPage.paramTitle] as String?,
+                    theme: args?[InspectorPage.paramTheme]
+                            as TalkerScreenTheme? ??
                         TalkerScreenTheme(
                           backgroundColor: context.theme.colorScheme.background,
                           textColor: context.colors.text,
                           cardColor: context.colors.card,
                         ),
-                    itemsBuilder: args?[LoggerPage.paramItemBuilder] as Widget
-                        Function(BuildContext, TalkerData)?,
+                    itemsBuilder: args?[InspectorPage.paramItemBuilder]
+                        as Widget Function(BuildContext, TalkerData)?,
                   ),
                 );
               },

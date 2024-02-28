@@ -49,14 +49,17 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) => SettingsView(
         onTapAppVersion: () {
           _model.tapNumber++;
-          talker.info("Tap number on app version: ${_model.tapNumber}");
+
           if (_model.tapNumber > 5 && _model.tapNumber < 10) {
             Toaster.showToast(
               context,
               title: context.l10n.environment_tap_number(10 - _model.tapNumber),
             );
           } else if (_model.tapNumber == 10) {
-            ChangeEnvironmentDialog.show(context);
+            talker.debug("Environment change dialog opened");
+            ChangeEnvironmentDialog.show(context).then((value) {
+              talker.debug("Environment change dialog closed");
+            });
             _model.tapNumber = 0;
           }
         },

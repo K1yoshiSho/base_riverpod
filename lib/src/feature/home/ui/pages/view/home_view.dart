@@ -67,10 +67,13 @@ class HomeView extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text(
-                      "You have pushed the button this many times: ${ref.watch(counterProvider)}",
+                      context.l10n.counter_times_text(
+                        ref.watch(counterProvider),
+                      ),
                       textAlign: TextAlign.center,
-                      style: context.theme.textTheme.titleLarge?.copyWith(
-                        fontSize: 20,
+                      style: context.theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                         color: context.theme.colorScheme.onBackground,
                       ),
                     ),

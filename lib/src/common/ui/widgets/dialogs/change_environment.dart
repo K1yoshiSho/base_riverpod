@@ -1,5 +1,6 @@
 import 'package:base_starter/src/common/configs/constants.dart';
 import 'package:base_starter/src/common/ui/pages/restart_wrapper.dart';
+import 'package:base_starter/src/common/ui/widgets/dialogs/toaster.dart';
 import 'package:base_starter/src/common/utils/extensions/context_extension.dart';
 import 'package:base_starter/src/common/utils/global_variables.dart';
 import 'package:base_starter/src/feature/initialization/model/environment.dart';
@@ -48,12 +49,21 @@ final class ChangeEnvironmentDialog {
                     contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                     dense: true,
                     onTap: () {
-                      context.dependencies.sharedPreferences.setString(
-                        Preferences.environment,
-                        env.value,
-                      );
-                      Navigator.pop(context);
-                      RestartWrapper.restartApp(navigatorKey.currentContext!);
+                      try {
+                        context.dependencies.sharedPreferences.setString(
+                          Preferences.environment,
+                          env.value,
+                        );
+                        talker.warning("Environment changed to ${env.name}");
+                        Navigator.pop(context);
+                        RestartWrapper.restartApp(navigatorKey.currentContext!);
+                      } catch (e, st) {
+                        talker.handle(e, st);
+                        Toaster.showErrorToast(
+                          context,
+                          title: context.l10n.error,
+                        );
+                      }
                     },
                   ),
                 ),

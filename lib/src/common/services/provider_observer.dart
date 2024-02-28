@@ -10,7 +10,7 @@ class ProviderLoggerObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     talker.logTyped(
-      ProviderLog('Provider $provider was initialized with $value'),
+      ProviderLog('Provider ${provider.name} was initialized with $value'),
     );
   }
 
@@ -20,7 +20,7 @@ class ProviderLoggerObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     talker.logTyped(
-      ProviderLog('Provider $provider was disposed'),
+      ProviderLog('Provider ${provider.name} was disposed'),
     );
   }
 
@@ -33,7 +33,7 @@ class ProviderLoggerObserver extends ProviderObserver {
   ) {
     talker.logTyped(
       ProviderLog(
-        'Provider $provider was updated from $previousValue to $newValue',
+        'Provider ${provider.name} was updated from $previousValue to $newValue',
       ),
     );
   }
@@ -48,7 +48,7 @@ class ProviderLoggerObserver extends ProviderObserver {
     talker.handle(
       error,
       stackTrace,
-      'Provider $provider failed with error $error',
+      'Provider ${provider.name} failed with error $error',
     );
   }
 }

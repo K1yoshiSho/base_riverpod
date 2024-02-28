@@ -3,11 +3,12 @@ import 'package:base_starter/src/common/utils/extensions/context_extension.dart'
 import 'package:base_starter/src/common/utils/extensions/string_extension.dart';
 import 'package:base_starter/src/common/utils/global_variables.dart';
 import 'package:base_starter/src/feature/home/state/counter.dart';
+import 'package:base_starter/src/feature/inspector/inspector_page.dart';
 import 'package:base_starter/src/feature/settings/ui/settings.dart';
-import 'package:base_starter/src/feature/talker/talker_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+
 part 'view/home_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           context.pushNamed(SettingsPage.name);
         },
         onLoggerPressed: () {
-          context.pushNamed(LoggerPage.name);
+          context.pushNamed(InspectorPage.name);
         },
       );
 }

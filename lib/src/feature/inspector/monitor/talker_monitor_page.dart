@@ -1,11 +1,12 @@
-// ignore_for_file: implementation_imports
-
 import 'package:base_starter/src/common/utils/extensions/context_extension.dart';
-import 'package:base_starter/src/feature/talker/monitor/monitor_card.dart';
-import 'package:base_starter/src/feature/talker/monitor/monitor_info_page.dart';
-import 'package:base_starter/src/feature/talker/utils/get_data_color.dart';
+import 'package:base_starter/src/feature/inspector/monitor/monitor_info_page.dart';
+import 'package:base_starter/src/feature/inspector/utils/get_data_color.dart';
 import 'package:flutter/material.dart';
+// ignore: implementation_imports
+import 'package:talker_flutter/src/ui/widgets/base_card.dart';
 import 'package:talker_flutter/talker_flutter.dart';
+
+part 'monitor_card.dart';
 
 class TalkerMonitorPage extends StatelessWidget {
   const TalkerMonitorPage({
@@ -14,10 +15,7 @@ class TalkerMonitorPage extends StatelessWidget {
     super.key,
   });
 
-  /// Theme for customize [TalkerScreen]
   final TalkerScreenTheme theme;
-
-  /// Talker implementation
   final Talker talker;
 
   @override
@@ -28,11 +26,11 @@ class TalkerMonitorPage extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_rounded),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const FittedBox(
+          title: FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
-              'Talker Monitor',
-              style: TextStyle(fontSize: 18),
+              'Inspector monitor',
+              style: context.theme.textTheme.titleMedium,
             ),
           ),
         ),
@@ -95,12 +93,14 @@ class TalkerMonitorPage extends StatelessWidget {
                 )
                 .toList();
 
+            final providers = logs.where((e) => e.title == "provider").toList();
+
             return CustomScrollView(
               slivers: [
                 if (httpRequests.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: httpRequests,
                       title: context.l10n.talker_type_http,
                       color: Colors.green,
@@ -145,7 +145,7 @@ class TalkerMonitorPage extends StatelessWidget {
                 if (allBlocs.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: allBlocs,
                       title: context.l10n.talker_type_bloc,
                       color: Colors.grey,
@@ -210,7 +210,7 @@ class TalkerMonitorPage extends StatelessWidget {
                 if (errors.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: errors,
                       title: context.l10n.talker_type_errors,
                       color: theme.logColors.getByType(TalkerLogType.error),
@@ -228,7 +228,7 @@ class TalkerMonitorPage extends StatelessWidget {
                 if (exceptions.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: exceptions,
                       title: context.l10n.talker_type_exceptions,
                       color: theme.logColors.getByType(TalkerLogType.exception),
@@ -246,7 +246,7 @@ class TalkerMonitorPage extends StatelessWidget {
                 if (warnings.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: warnings,
                       title: context.l10n.talker_type_warnings,
                       color: theme.logColors.getByType(TalkerLogType.warning),
@@ -264,7 +264,7 @@ class TalkerMonitorPage extends StatelessWidget {
                 if (infos.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: infos,
                       title: context.l10n.talker_type_info,
                       color: theme.logColors.getByType(TalkerLogType.info),
@@ -282,7 +282,7 @@ class TalkerMonitorPage extends StatelessWidget {
                 if (goods.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: goods,
                       title: context.l10n.talker_type_good,
                       color: getTypeColor(context: context, key: "good"),
@@ -297,10 +297,28 @@ class TalkerMonitorPage extends StatelessWidget {
                     ),
                   ),
                 ],
+                if (providers.isNotEmpty) ...[
+                  const SliverToBoxAdapter(child: SizedBox(height: 10)),
+                  SliverToBoxAdapter(
+                    child: _TalkerMonitorsCard(
+                      logs: providers,
+                      title: context.l10n.talker_type_provider,
+                      color: getTypeColor(context: context, key: "provider"),
+                      icon: Icons.cast_rounded,
+                      subtitle: context.l10n
+                          .talker_type_provider_count(providers.length),
+                      onTap: () => _openTypedLogsScreen(
+                        context,
+                        providers,
+                        context.l10n.talker_type_provider,
+                      ),
+                    ),
+                  ),
+                ],
                 if (verboseDebug.isNotEmpty) ...[
                   const SliverToBoxAdapter(child: SizedBox(height: 10)),
                   SliverToBoxAdapter(
-                    child: TalkerMonitorsCard(
+                    child: _TalkerMonitorsCard(
                       logs: verboseDebug,
                       title: context.l10n.talker_type_debug,
                       color: theme.logColors.getByType(TalkerLogType.verbose),

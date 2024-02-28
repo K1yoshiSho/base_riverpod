@@ -32,6 +32,13 @@
          "text": {}
       }
    },
+   "talker_type_provider": "Providers",
+   "talker_type_provider_count": "Provider logs count: {text}",
+   "@talker_type_provider_count": {
+      "placeholders": {
+         "text": {}
+      }
+   },
    "talker_type_info": "Info",
    "talker_type_info_count": "Info logs count: {text}",
    "@talker_type_info_count": {
@@ -155,6 +162,12 @@
    "go_to_logger": "Go to logger",
    "environment_tap_number": "To open the dialog, it remains: {number}",
    "@environment_tap_number": {
+      "placeholders": {
+         "number": {}
+      }
+   },
+   "counter_times_text": "You have pushed the button this many times: {number}",
+   "@counter_times_text": {
       "placeholders": {
          "number": {}
       }
