@@ -25,7 +25,9 @@ final class AppTheme with Diagnosticable {
 
   /// The default [AppTheme].
   static final defaultTheme = AppTheme(
-    mode: ThemeMode.system,
+    mode: PlatformDispatcher.instance.platformBrightness == Brightness.dark
+        ? ThemeMode.dark
+        : ThemeMode.light,
     seed: Colors.blue,
   );
 
