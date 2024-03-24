@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:base_starter/src/common/configs/constants.dart';
+import 'package:base_starter/src/common/services/app_config.dart';
 import 'package:base_starter/src/feature/initialization/model/environment.dart';
 import 'package:base_starter/src/feature/initialization/model/initialization_progress.dart';
 import 'package:base_starter/src/feature/settings/bloc/settings_bloc.dart';
-import 'package:base_starter/src/feature/settings/data/locale_datasource.dart';
-import 'package:base_starter/src/feature/settings/data/locale_repository.dart';
-import 'package:base_starter/src/feature/settings/data/theme_datasource.dart';
-import 'package:base_starter/src/feature/settings/data/theme_mode_codec.dart';
-import 'package:base_starter/src/feature/settings/data/theme_repository.dart';
+import 'package:base_starter/src/feature/settings/data/locale/locale_datasource.dart';
+import 'package:base_starter/src/feature/settings/data/locale/locale_repository.dart';
+import 'package:base_starter/src/feature/settings/data/theme/theme_datasource.dart';
+import 'package:base_starter/src/feature/settings/data/theme/theme_mode_codec.dart';
+import 'package:base_starter/src/feature/settings/data/theme/theme_repository.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,6 +31,10 @@ mixin InitializationSteps {
     'Shared Preferences': (progress) async {
       final sharedPreferences = await SharedPreferences.getInstance();
       progress.dependencies.sharedPreferences = sharedPreferences;
+    },
+    'App Configs': (progress) async {
+      final sharedPreferences = progress.dependencies.sharedPreferences;
+      AppConfigsService.initialize(sharedPreferences);
     },
     'Environment': (progress) async {
       final sharedPreferences = progress.dependencies.sharedPreferences;

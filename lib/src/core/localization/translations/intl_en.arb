@@ -171,5 +171,6 @@
       "placeholders": {
          "number": {}
       }
-   }
+   },
+   "performance_tracker": "Performance tracking"
 }

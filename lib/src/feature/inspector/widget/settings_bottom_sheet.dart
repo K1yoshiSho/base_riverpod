@@ -3,11 +3,13 @@
 import 'package:base_starter/src/common/utils/extensions/context_extension.dart';
 import 'package:base_starter/src/feature/inspector/widget/base_bottom_sheet.dart';
 import 'package:base_starter/src/feature/inspector/widget/settings_card.dart';
+import 'package:base_starter/src/feature/settings/state/app_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:talker_flutter/talker_flutter.dart';
 
-class TalkerSettingsBottomSheets extends StatefulWidget {
+class TalkerSettingsBottomSheets extends ConsumerStatefulWidget {
   const TalkerSettingsBottomSheets({
     required this.talkerScreenTheme,
     required this.talker,
@@ -21,12 +23,12 @@ class TalkerSettingsBottomSheets extends StatefulWidget {
   final ValueNotifier<Talker> talker;
 
   @override
-  State<TalkerSettingsBottomSheets> createState() =>
+  ConsumerState<TalkerSettingsBottomSheets> createState() =>
       _TalkerSettingsBottomSheetState();
 }
 
 class _TalkerSettingsBottomSheetState
-    extends State<TalkerSettingsBottomSheets> {
+    extends ConsumerState<TalkerSettingsBottomSheets> {
   @override
   void initState() {
     widget.talker.addListener(() => setState(() {}));
@@ -75,6 +77,20 @@ class _TalkerSettingsBottomSheetState
             ),
           );
           widget.talker.notifyListeners();
+        },
+      ),
+      TalkerSettingsCardItem(
+        canEdit: widget.talker.value.settings.enabled,
+        talkerScreenTheme: widget.talkerScreenTheme,
+        title: context.l10n.performance_tracker,
+        backgroundColor: widget.talkerScreenTheme.cardColor,
+        enabled: ref.watch(appConfigsProvider).isPerformanceTrackingEnabled,
+        onChanged: (enabled) {
+          ref.read(appConfigsProvider.notifier).setPerformanceTracking(
+                value: enabled,
+              );
+          widget.talker.notifyListeners();
+          // if (context.mounted) RestartWrapper.restartApp(context);
         },
       ),
     ];
